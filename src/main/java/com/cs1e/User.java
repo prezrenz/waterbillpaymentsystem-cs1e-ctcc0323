@@ -83,10 +83,10 @@ public class User {
     }
 
     String stringify() {
-        return String.format("%s,%s,%s,%b,%s,%d,%d,%d,%d,%s,%s,%d,%d",
+        return String.format("%s,%s,%s,%b,%s,%d,%d,%d,%d,%s,%s,%s,%d",
                             name, email, password, isAdmin,
                             address, previousReading, currentReading, consumption,
-                            totalDue, dueDate, status);
+                            totalDue, dueDate, status, creditCardNumber, balance);
     }
 
     void setNewReading(int newReading, String newDueDate, final int RATE) {

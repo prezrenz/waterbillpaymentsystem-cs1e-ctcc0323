@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class Database {
-    ArrayList<User> users;
+    ArrayList<User> users = new ArrayList<User>();
 
     String databaseFileName = "users.dat";
 
@@ -17,7 +17,7 @@ public class Database {
             users.add(admin);
 
             try {
-                FileWriter databaseWriter = new FileWriter(databaseFile);
+                FileWriter databaseWriter = new FileWriter(databaseFile); 
                 databaseWriter.write(usersToString());
 
                 databaseWriter.close();
@@ -61,7 +61,7 @@ public class Database {
         String data = "";
 
         for (User user : users) {
-            data.concat(user.toString());
+            data = data.concat(user.stringify());
         }
 
         return data;

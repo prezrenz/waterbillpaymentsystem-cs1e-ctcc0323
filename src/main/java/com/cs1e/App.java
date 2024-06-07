@@ -6,8 +6,12 @@ package com.cs1e;
  */
 public class App 
 {
+    static Database database;
+
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        database = new Database();
+
+        System.err.print(database.users.get(0).stringify());
     }
 }
