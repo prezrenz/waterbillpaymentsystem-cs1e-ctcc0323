@@ -10,8 +10,6 @@ public class App
 
     public static void main( String[] args )
     {
-        database = new Database();
-
-        System.err.print(database.users.get(0).stringify());
+        new Login();
     }
 }
