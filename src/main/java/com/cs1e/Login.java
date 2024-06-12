@@ -1,11 +1,10 @@
 package com.cs1e;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Login {
+public class Login extends JPanel {
     Login() {
-    JFrame frame = new JFrame();
-    frame.setSize(960, 540);
-    frame.setVisible(true);
+        setSize(960, 540);
+        setVisible(true);
     }
 }
