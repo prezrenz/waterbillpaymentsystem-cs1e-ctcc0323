@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class Database {
+    static class DatabaseError extends RuntimeException {
+        String msg;
+
+        DatabaseError(String msg) {
+            this.msg = msg;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+    }
+
     ArrayList<User> users = new ArrayList<User>();
 
     String databaseFileName = "users.dat";
@@ -91,5 +103,18 @@ public class Database {
                                 totalDue, dueDate, status, creditCardNumber, balance);
 
         return newUser;
+    }
+
+    void newUser(String name, String email, String password, String address, String creditCardNumber) {
+        for (User user : users) {
+            if(name == user.name) {
+                throw new DatabaseError("User already exists");
+            }
+        }
+
+        User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 1000);
+
+        users.add(newUser);
+
     }
 }

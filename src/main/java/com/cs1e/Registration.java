@@ -3,6 +3,7 @@ package com.cs1e;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -91,6 +92,22 @@ public class Registration extends JPanel {
         buttonsPanel.add(registerButton);
         buttonsPanel.add(backButton);
 
+        registerButton.addActionListener((ae) -> register());
         backButton.addActionListener((ae) -> mainApp.cardLayout.show(mainApp.mainPanel, "Login"));
+    }
+
+    private void register() {
+        try {
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String password = passwordField.getText();
+            String address = addressField.getText();
+            String creditCardNumber = creditCardField.getText();
+
+            mainApp.database.newUser(name, email, password, address, creditCardNumber);
+        } catch (Database.DatabaseError e) {
+            System.out.print("caught");
+            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }
