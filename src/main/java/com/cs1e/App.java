@@ -30,7 +30,7 @@ public class App extends JFrame
         add(mainPanel);
 
         loginScreen = new Login();
-        registrationScreen = new Registration();
+        registrationScreen = new Registration(this);
 
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");

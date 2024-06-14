@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class Registration extends JPanel {
+    App mainApp;
+
     JLabel headerLabel;
 
     JPanel optionsPanel;
@@ -31,7 +33,9 @@ public class Registration extends JPanel {
     JButton registerButton;
     JButton backButton;
 
-    Registration() {
+    Registration(App parent) {
+        mainApp = parent;
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         headerLabel = new JLabel("Registration");       
@@ -86,5 +90,7 @@ public class Registration extends JPanel {
         add(buttonsPanel);
         buttonsPanel.add(registerButton);
         buttonsPanel.add(backButton);
+
+        backButton.addActionListener((ae) -> mainApp.cardLayout.show(mainApp.mainPanel, "Login"));
     }
 }
