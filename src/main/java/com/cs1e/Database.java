@@ -2,6 +2,7 @@
 package com.cs1e;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.*;
 
 public class Database {
@@ -18,7 +19,7 @@ public class Database {
     }
 
     ArrayList<User> users = new ArrayList<User>();
-
+    final int RATE = 10;
     String databaseFileName = "users.dat";
 
     Database() {
@@ -79,8 +80,31 @@ public class Database {
         return data;
     }
 
+    ArrayList<Object[]> usersToTableData(String filter) {
+        ArrayList<Object[]> tableData = new ArrayList<Object[]>();        
+
+        for (User user : users) {
+            if(user.status.equalsIgnoreCase("admin")) {
+                continue;
+            }
+
+            if(!filter.equalsIgnoreCase(user.status) && !filter.isEmpty()) {
+                continue;
+            } 
+
+            Object[] data = user.tabularize();
+            tableData.add(data);
+        }
+
+        return tableData;
+    }
+
+    ArrayList<Object[]> usersToTableData() {
+        return usersToTableData("");
+    }
+
     User stringToUser(String data) {
-        String[] split = data.split(",");
+        String[] split = data.split(":");
 
         String name = split[0];
         String email = split[1];
@@ -113,10 +137,57 @@ public class Database {
         } 
 
         User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 1000);
-
-        System.out.println(newUser.stringify());
-
         users.add(newUser);
+        
+        usersToFile();
+    }
 
+    void deleteUser(String email) {
+        boolean found = false;
+        Iterator<User> iter = users.iterator(); // Use iterator to avoid concurrent modification exception
+
+        while (iter.hasNext()) {
+            User user = iter.next();
+
+            if(email.equals(user.email)) {
+                if(user.status.equalsIgnoreCase("admin")) {
+                    throw new DatabaseError("Cannot delete the admin account!");
+                }
+
+                found = true;
+                iter.remove();
+            }
+        } 
+
+        if(!found) {
+            throw new DatabaseError("User not found");
+        }
+
+        usersToFile();
+    }
+
+    void setNewReading(String email, int newReading, String newDueDate) {
+        boolean found = false;
+
+        Iterator<User> iter = users.iterator(); // Use iterator to avoid concurrent modification exception
+
+        while (iter.hasNext()) {
+            User user = iter.next();
+
+            if(email.equals(user.email)) {
+                if(user.status.equalsIgnoreCase("admin")) {
+                    throw new DatabaseError("Cannot set reading for an admin account!");
+                }
+
+                found = true;
+                user.setNewReading(newReading, newDueDate, RATE);
+            }
+        } 
+
+        if(!found) {
+            throw new DatabaseError("User not found");
+        }
+
+        usersToFile();
     }
 }

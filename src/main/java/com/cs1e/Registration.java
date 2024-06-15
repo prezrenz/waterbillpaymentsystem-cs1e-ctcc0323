@@ -1,5 +1,7 @@
 package com.cs1e;
 
+import java.awt.FlowLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -50,7 +52,7 @@ public class Registration extends JPanel {
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
         fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.X_AXIS));
+        optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         emailLabel = new JLabel("Email", JLabel.LEFT);
         passwordLabel = new JLabel("Password", JLabel.LEFT);
@@ -58,11 +60,11 @@ public class Registration extends JPanel {
         addressLabel = new JLabel("Address", JLabel.LEFT);
         creditCardLabel = new JLabel("Credit Card Number", JLabel.LEFT);
 
-        emailField = new JTextField(32);
-        passwordField = new JTextField(32);
-        nameField = new JTextField(32);
-        addressField = new JTextField(32);
-        creditCardField = new JTextField(32);
+        emailField = new JTextField(24);
+        passwordField = new JTextField(24);
+        nameField = new JTextField(24);
+        addressField = new JTextField(24);
+        creditCardField = new JTextField(24);
 
         registerButton = new JButton("Register");
         backButton = new JButton("Back");
@@ -73,6 +75,8 @@ public class Registration extends JPanel {
         labelsPanel.add(nameLabel);
         labelsPanel.add(addressLabel);
         labelsPanel.add(creditCardLabel);
+
+        // Give space below each label to align with fields
         emailLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         passwordLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
@@ -105,13 +109,13 @@ public class Registration extends JPanel {
             String creditCardNumber = creditCardField.getText();
 
             if((name.isEmpty()) || (email.isEmpty()) || (password.isEmpty()) || (address.isEmpty()) || (creditCardNumber.isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
         } catch (Database.DatabaseError e) {
-            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) { // Catch-all
             e.printStackTrace();
         }
