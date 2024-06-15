@@ -157,11 +157,7 @@ public class Database {
                 found = true;
                 iter.remove();
             }
-        }
-
-        for (User user : users) {
-            
-        }
+        } 
 
         if(!found) {
             throw new DatabaseError("User not found");
