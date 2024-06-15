@@ -88,7 +88,7 @@ public class Database {
                 continue;
             }
 
-            if(filter.equalsIgnoreCase(user.status) && !filter.isEmpty()) {
+            if(!filter.equalsIgnoreCase(user.status) && !filter.isEmpty()) {
                 continue;
             } 
 
