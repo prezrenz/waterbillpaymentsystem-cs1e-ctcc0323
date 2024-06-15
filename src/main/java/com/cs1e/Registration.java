@@ -73,6 +73,8 @@ public class Registration extends JPanel {
         labelsPanel.add(nameLabel);
         labelsPanel.add(addressLabel);
         labelsPanel.add(creditCardLabel);
+
+        // Give space below each label to align with fields
         emailLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         passwordLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));

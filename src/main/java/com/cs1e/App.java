@@ -20,6 +20,7 @@ public class App extends JFrame
 
     Login loginScreen;
     Registration registrationScreen;
+    Admin adminScreen;
 
     App(final int WIDTH, final int HEIGHT) {
         database = new Database();
@@ -31,11 +32,13 @@ public class App extends JFrame
 
         loginScreen = new Login();
         registrationScreen = new Registration(this);
+        adminScreen = new Admin(this);
 
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");
+        mainPanel.add(adminScreen, "Admin");
 
-        cardLayout.show(mainPanel, "Register");
+        cardLayout.show(mainPanel, "Admin");
         
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
