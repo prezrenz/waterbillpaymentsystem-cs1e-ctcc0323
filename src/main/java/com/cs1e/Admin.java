@@ -1,17 +1,19 @@
 package com.cs1e;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.cs1e.Database.DatabaseError;
 
 public class Admin extends JPanel {
     App mainApp;
@@ -28,7 +30,7 @@ public class Admin extends JPanel {
     JButton viewAllCustomersButton;
     JButton viewAllPaidButton;
     JButton viewAllUnverifiedButton;
-    JButton viewAllLogoutButton;
+    JButton logoutButton;
 
     Admin(App parent) {
         mainApp = parent;
@@ -54,7 +56,7 @@ public class Admin extends JPanel {
         viewAllCustomersButton = new JButton("View All Customers");
         viewAllPaidButton = new JButton("View All Paid");
         viewAllUnverifiedButton = new JButton("View All Unverified");
-        viewAllLogoutButton = new JButton("Log out");
+        logoutButton = new JButton("Log out");
 
         add(functionsPanel);
         functionsPanel.add(setNewReadingButton);
@@ -74,14 +76,16 @@ public class Admin extends JPanel {
         viewAllCustomersButton.setAlignmentX(JButton.LEFT_ALIGNMENT);
         viewAllUnverifiedButton.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 
-        add(viewAllLogoutButton);
-        viewAllLogoutButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        add(logoutButton);
+        logoutButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
         
+        setNewReadingButton.addActionListener((ae) -> setNewReading());
+        deleteAccountButton.addActionListener((ae) -> deleteAccount());
         viewAllUnpaidButton.addActionListener((ae) -> viewAllUnpaid());
         viewAllCustomersButton.addActionListener((ae) -> viewAllCustomers());
         viewAllPaidButton.addActionListener((ae) -> viewAllPaid());
         viewAllUnverifiedButton.addActionListener((ae) -> viewAllUnverified());
-        viewAllLogoutButton.addActionListener((ae) -> logout());
+        logoutButton.addActionListener((ae) -> logout());
     }
 
     private JScrollPane createTablePane(ArrayList<Object[]> tableData) {
@@ -109,6 +113,26 @@ public class Admin extends JPanel {
         dialog.pack();
         dialog.setLocationRelativeTo(mainApp);
         dialog.setVisible(true);
+    }
+
+    private void setNewReading() {
+        mainApp.cardLayout.show(mainApp, "NewReading");
+        mainApp.database.usersToFile();
+    }
+
+    private void deleteAccount() {
+        String email = JOptionPane.showInputDialog("Please enter the email of the user to be removed:");
+        
+        if(email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Field is empty, please try again", "Failed to delete account!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            mainApp.database.deleteUser(email);
+        } catch (DatabaseError e) {
+            JOptionPane.showMessageDialog(null, e.getMsg(), "Failed to delete account!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void viewAllUnpaid() {

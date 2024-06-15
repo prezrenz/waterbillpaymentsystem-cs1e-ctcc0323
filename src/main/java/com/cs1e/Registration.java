@@ -107,14 +107,13 @@ public class Registration extends JPanel {
             String creditCardNumber = creditCardField.getText();
 
             if((name.isEmpty()) || (email.isEmpty()) || (password.isEmpty()) || (address.isEmpty()) || (creditCardNumber.isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
-            mainApp.database.usersToFile();
         } catch (Database.DatabaseError e) {
-            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) { // Catch-all
             e.printStackTrace();
         }

@@ -136,10 +136,28 @@ public class Database {
         } 
 
         User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 1000);
-
-        System.out.println(newUser.stringify());
-
         users.add(newUser);
+        
+        usersToFile();
+    }
 
+    void deleteUser(String email) {
+        boolean found = false;
+        for (User user : users) {
+            if(email.equals(user.email)) {
+                if(user.status.equalsIgnoreCase("admin")) {
+                    throw new DatabaseError("Cannot delete the admin account!");
+                }
+
+                found = true;
+                users.remove(user);
+            }
+        }
+
+        if(!found) {
+            throw new DatabaseError("User not found");
+        }
+
+        usersToFile();
     }
 }
