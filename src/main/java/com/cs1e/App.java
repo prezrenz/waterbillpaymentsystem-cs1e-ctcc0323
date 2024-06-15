@@ -22,6 +22,7 @@ public class App extends JFrame
     Registration registrationScreen;
     Admin adminScreen;
     NewReading newReadingScreen;
+    Payment paymentScreen;
 
     App(final int WIDTH, final int HEIGHT) {
         database = new Database();
@@ -35,13 +36,14 @@ public class App extends JFrame
         registrationScreen = new Registration(this);
         adminScreen = new Admin(this);
         newReadingScreen = new NewReading(this);
-
+        
+        paymentScreen = new Payment();
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");
         mainPanel.add(adminScreen, "Admin");
         mainPanel.add(newReadingScreen, "NewReading");
-
-        cardLayout.show(mainPanel, "Admin");
+        mainPanel.add(paymentScreen, "Payment");
+        cardLayout.show(mainPanel, "Payment");
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
