@@ -93,7 +93,11 @@ public class Admin extends JPanel {
                                 "Previous Reading", "Current Reading", "Consumption",
                                 "Total Due", "Due Date", "Status"};
         
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false; // Makes all cells uneditable
+            }
+        };
         JTable table = new JTable(tableModel);
         
         for (Object[] data : tableData) {
@@ -138,7 +142,7 @@ public class Admin extends JPanel {
     private void viewAllUnpaid() {
         ArrayList<Object[]> tableData = mainApp.database.usersToTableData("UNPAID");
         JScrollPane scrollPane = createTablePane(tableData);
-        createDialog(scrollPane, "View All Customers");
+        createDialog(scrollPane, "View All Unpaid");
     }
 
     private void viewAllCustomers() {
@@ -150,13 +154,13 @@ public class Admin extends JPanel {
     private void viewAllPaid() {
         ArrayList<Object[]> tableData = mainApp.database.usersToTableData("PAID");
         JScrollPane scrollPane = createTablePane(tableData);
-        createDialog(scrollPane, "View All Customers");
+        createDialog(scrollPane, "View All Paid");
     }
 
     private void viewAllUnverified() {
         ArrayList<Object[]> tableData = mainApp.database.usersToTableData("UNVERIFIED");
         JScrollPane scrollPane = createTablePane(tableData);
-        createDialog(scrollPane, "View All Customers");
+        createDialog(scrollPane, "View All Unverified");
     }
 
     private void logout() {

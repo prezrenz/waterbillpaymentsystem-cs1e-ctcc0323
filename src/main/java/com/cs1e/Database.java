@@ -168,7 +168,12 @@ public class Database {
 
     void setNewReading(String email, int newReading, String newDueDate) {
         boolean found = false;
-        for (User user : users) {
+
+        Iterator<User> iter = users.iterator(); // Use iterator to avoid concurrent modification exception
+
+        while (iter.hasNext()) {
+            User user = iter.next();
+
             if(email.equals(user.email)) {
                 if(user.status.equalsIgnoreCase("admin")) {
                     throw new DatabaseError("Cannot set reading for an admin account!");
@@ -177,7 +182,7 @@ public class Database {
                 found = true;
                 user.setNewReading(newReading, newDueDate, RATE);
             }
-        }
+        } 
 
         if(!found) {
             throw new DatabaseError("User not found");

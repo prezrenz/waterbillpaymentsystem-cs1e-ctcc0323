@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.cs1e.Database.DatabaseError;
+
 public class NewReading extends JPanel {
     App mainApp;
 
@@ -96,7 +98,9 @@ public class NewReading extends JPanel {
             mainApp.database.setNewReading(email, newReading, newDueDate);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid whole number for the current reading", "Error", JOptionPane.ERROR_MESSAGE);
-        } 
+        } catch (DatabaseError e) {
+            JOptionPane.showMessageDialog(null, e.getMsg(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void back() {
