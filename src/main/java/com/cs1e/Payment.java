@@ -1,22 +1,33 @@
 package com.cs1e;
 
+import java.awt.Dimension;
+import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JOptionPane;
 
-public class Payment extends JFrame {
-    JLabel LThaniel, LStatus, LDue, LBalance, LAmountDue, LBalanceAfterPay;
-    JButton Confirm, Back;
+public class Payment extends JPanel {
+    App mainApp;
 
-    public Payment() {
-        setSize(560, 400);
+    JLabel LPayment;
+    JLabel LStatus;
+    JLabel LDue; 
+    JLabel LBalance;
+    JLabel LAmountDue;
+    JLabel LBalanceAfterPay;
+    
+    JButton Confirm;
+    JButton Back;
+
+    Payment(App parent) {
+        mainApp = parent;
+
+        setPreferredSize(new Dimension(560, 400));
         setLayout(null);
 
-        LThaniel = new JLabel("PAYMENT");
-        LThaniel.setBounds(250, 50, 200, 20);
-        add(LThaniel);
+        LPayment = new JLabel("PAYMENT");
+        LPayment.setBounds(250, 50, 200, 20);
+        add(LPayment);
 
 
         LStatus = new JLabel("Status: UNPAID");
@@ -42,16 +53,28 @@ public class Payment extends JFrame {
 
         Confirm = new JButton("Confirm");
         Confirm.setBounds(150, 250, 100, 30);
-        //Confirm.addActionListener(this);
+        //Confirm.addActionListener((ae) -> pay());
         add(Confirm);
 
         Back = new JButton("Back");
         Back.setBounds(300, 250, 100, 30);
-        //Back.addActionListener(this);
+        Back.addActionListener((ae) -> back());
         add(Back);
+    }
 
+    // private void pay() {
+    //     try {
+    //         mainApp.currentUser.pay(); 
+    //         JOptionPane.showMessageDialog(mainApp, "Successfully paid due");
+    //         back();
+    //     } catch (DatabaseError e) {
+    //         JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Payment Error!", JOptionPane.ERROR_MESSAGE);
+    //     }
+    // }
 
-        setVisible(true);
+    private void back() {
+        mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard"); // currently errors
+        mainApp.database.usersToFile();
     }
 
 }

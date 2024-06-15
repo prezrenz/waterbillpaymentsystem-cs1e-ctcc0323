@@ -1,5 +1,7 @@
 package com.cs1e;
 
+import com.cs1e.Database.DatabaseError;
+
 public class User {
     String name;
     String email;
@@ -97,5 +99,14 @@ public class User {
 
         dueDate = newDueDate;
         status = "UNPAID";
+    }
+
+    void pay() {
+        if(balance < totalDue) {
+            throw new DatabaseError("Not enough balance!");
+        }
+
+        balance = balance - totalDue;
+        status = "PAID";
     }
 }
