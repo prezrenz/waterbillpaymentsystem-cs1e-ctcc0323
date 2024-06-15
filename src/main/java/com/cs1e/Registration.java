@@ -112,6 +112,7 @@ public class Registration extends JPanel {
             }
 
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
+            mainApp.database.usersToFile();
         } catch (Database.DatabaseError e) {
             JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) { // Catch-all

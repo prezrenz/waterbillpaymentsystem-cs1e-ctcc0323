@@ -79,6 +79,29 @@ public class Database {
         return data;
     }
 
+    ArrayList<Object[]> usersToTableData(String filter) {
+        ArrayList<Object[]> tableData = new ArrayList<Object[]>();        
+
+        for (User user : users) {
+            if(user.status.equalsIgnoreCase("admin")) {
+                continue;
+            }
+
+            if(filter.equalsIgnoreCase(user.status) && !filter.isEmpty()) {
+                continue;
+            } 
+
+            Object[] data = user.tabularize();
+            tableData.add(data);
+        }
+
+        return tableData;
+    }
+
+    ArrayList<Object[]> usersToTableData() {
+        return usersToTableData("");
+    }
+
     User stringToUser(String data) {
         String[] split = data.split(",");
 

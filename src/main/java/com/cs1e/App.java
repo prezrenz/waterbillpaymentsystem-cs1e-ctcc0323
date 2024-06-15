@@ -39,7 +39,7 @@ public class App extends JFrame
         mainPanel.add(adminScreen, "Admin");
 
         cardLayout.show(mainPanel, "Admin");
-        
+
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);

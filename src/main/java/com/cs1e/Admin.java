@@ -1,10 +1,17 @@
 package com.cs1e;
 
-import javax.swing.BorderFactory;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Admin extends JPanel {
     App mainApp;
@@ -69,12 +76,66 @@ public class Admin extends JPanel {
 
         add(viewAllLogoutButton);
         viewAllLogoutButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-
+        
+        viewAllUnpaidButton.addActionListener((ae) -> viewAllUnpaid());
+        viewAllCustomersButton.addActionListener((ae) -> viewAllCustomers());
+        viewAllPaidButton.addActionListener((ae) -> viewAllPaid());
+        viewAllUnverifiedButton.addActionListener((ae) -> viewAllUnverified());
         viewAllLogoutButton.addActionListener((ae) -> logout());
     }
 
-    private void logout()
-    {
+    private JScrollPane createTablePane(ArrayList<Object[]> tableData) {
+        String columnNames[] = { "Full Name", "Email", "Address",
+                                "Previous Reading", "Current Reading", "Consumption",
+                                "Total Due", "Due Date", "Status"};
+        
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        JTable table = new JTable(tableModel);
+        
+        for (Object[] data : tableData) {
+            tableModel.addRow(data);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(1000, 600));
+        table.setFillsViewportHeight(true);
+
+        return scrollPane;
+    }
+
+    private void createDialog(JScrollPane scrollPane, String title) {
+        JDialog dialog = new JDialog(mainApp, title);
+        dialog.add(scrollPane);
+        dialog.pack();
+        dialog.setLocationRelativeTo(mainApp);
+        dialog.setVisible(true);
+    }
+
+    private void viewAllUnpaid() {
+        ArrayList<Object[]> tableData = mainApp.database.usersToTableData("UNPAID");
+        JScrollPane scrollPane = createTablePane(tableData);
+        createDialog(scrollPane, "View All Customers");
+    }
+
+    private void viewAllCustomers() {
+        ArrayList<Object[]> tableData = mainApp.database.usersToTableData();
+        JScrollPane scrollPane = createTablePane(tableData);
+        createDialog(scrollPane, "View All Customers");
+    }
+
+    private void viewAllPaid() {
+        ArrayList<Object[]> tableData = mainApp.database.usersToTableData("PAID");
+        JScrollPane scrollPane = createTablePane(tableData);
+        createDialog(scrollPane, "View All Customers");
+    }
+
+    private void viewAllUnverified() {
+        ArrayList<Object[]> tableData = mainApp.database.usersToTableData("UNVERIFIED");
+        JScrollPane scrollPane = createTablePane(tableData);
+        createDialog(scrollPane, "View All Customers");
+    }
+
+    private void logout() {
         mainApp.cardLayout.show(mainApp.mainPanel, "Login");
         mainApp.database.usersToFile();
     }
