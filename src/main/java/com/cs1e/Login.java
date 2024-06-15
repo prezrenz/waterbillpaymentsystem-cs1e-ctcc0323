@@ -1,20 +1,24 @@
 package com.cs1e;
 
 import java.awt.Dimension;
-
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.cs1e.Database.DatabaseError;
 
 public class Login extends JPanel {
+    App mainApp;
+
     JLabel Title, Email, Password;
     JTextField TEmail, TPassword;
     JButton Login, Register, Exit;
 
+    Login(App parent) {
+        mainApp = parent;
 
-        Login() {
         setPreferredSize(new Dimension(540, 400));
         setLayout(null);
 
@@ -40,17 +44,54 @@ public class Login extends JPanel {
 
         Login = new JButton("Login");
         Login.setBounds(150, 140, 120, 30);
-        //Back.addActionListener(this);
+        Login.addActionListener((ae) -> login());
         add(Login);
 
         Register = new JButton("Register");
         Register.setBounds(300, 140, 120, 30);
-        //Back.addActionListener(this);
+        Register.addActionListener((ae) -> register());
         add(Register);
 
         Exit = new JButton("Exit");
         Exit.setBounds(225, 200, 120, 30);
-        //Back.addActionListener(this);
+        Exit.addActionListener((ae) -> exit());
         add(Exit);
+    }
+
+    private void login() {
+        try {
+            String email = TEmail.getText();
+            String password = TPassword.getText();
+
+            System.out.println(email.isEmpty());
+
+            if((email.isEmpty()) || (password.isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Login Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            User user = mainApp.database.findUser(email);
+
+            if(user.password.equals(password)) {
+                JOptionPane.showMessageDialog(mainApp, "Successfully logged in!");
+                // set up dashboard
+                mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
+                return;
+            }
+            
+            throw new DatabaseError("Wrong password");
+        } catch (DatabaseError e) { 
+            JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void register() {
+        mainApp.cardLayout.show(mainApp.mainPanel, "Register");
+        mainApp.database.usersToFile();
+    }
+
+    private void exit() {
+        mainApp.database.usersToFile();
+        System.exit(0);
     }
 }

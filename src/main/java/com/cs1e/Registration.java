@@ -51,7 +51,7 @@ public class Registration extends JPanel {
 
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
         fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         emailLabel = new JLabel("Email", JLabel.LEFT);

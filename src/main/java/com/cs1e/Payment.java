@@ -2,6 +2,9 @@ package com.cs1e;
 
 import java.awt.Dimension;
 import javax.swing.JPanel;
+
+import com.cs1e.Database.DatabaseError;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,7 +56,7 @@ public class Payment extends JPanel {
 
         Confirm = new JButton("Confirm");
         Confirm.setBounds(150, 250, 100, 30);
-        //Confirm.addActionListener((ae) -> pay());
+        Confirm.addActionListener((ae) -> pay());
         add(Confirm);
 
         Back = new JButton("Back");
@@ -62,15 +65,15 @@ public class Payment extends JPanel {
         add(Back);
     }
 
-    // private void pay() {
-    //     try {
-    //         mainApp.currentUser.pay(); 
-    //         JOptionPane.showMessageDialog(mainApp, "Successfully paid due");
-    //         back();
-    //     } catch (DatabaseError e) {
-    //         JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Payment Error!", JOptionPane.ERROR_MESSAGE);
-    //     }
-    // }
+    private void pay() {
+        try {
+            mainApp.currentUser.pay(); 
+            JOptionPane.showMessageDialog(mainApp, "Successfully paid due");
+            back();
+        } catch (DatabaseError e) {
+            JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Payment Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void back() {
         mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard"); // currently errors

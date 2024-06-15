@@ -129,6 +129,16 @@ public class Database {
         return newUser;
     }
 
+    User findUser(String email) {
+        for (User user : users) {
+            if(email.equals(user.email)) {
+                return user;
+            }
+        }
+
+        throw new DatabaseError("User not found");
+    }
+
     void newUser(String name, String email, String password, String address, String creditCardNumber) {
         for (User user : users) {
             if((name.equals(user.name)) || (email.equals(user.email)) || (creditCardNumber.equals(user.creditCardNumber))) {
@@ -136,7 +146,7 @@ public class Database {
             }
         } 
 
-        User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 1000);
+        User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 10000);
         users.add(newUser);
         
         usersToFile();
