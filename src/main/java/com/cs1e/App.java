@@ -21,6 +21,7 @@ public class App extends JFrame
     Login loginScreen;
     Registration registrationScreen;
     Admin adminScreen;
+    NewReading newReadingScreen;
 
     App(final int WIDTH, final int HEIGHT) {
         database = new Database();
@@ -33,10 +34,12 @@ public class App extends JFrame
         loginScreen = new Login();
         registrationScreen = new Registration(this);
         adminScreen = new Admin(this);
+        newReadingScreen = new NewReading(this);
 
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");
         mainPanel.add(adminScreen, "Admin");
+        mainPanel.add(newReadingScreen, "NewReading");
 
         cardLayout.show(mainPanel, "Admin");
 

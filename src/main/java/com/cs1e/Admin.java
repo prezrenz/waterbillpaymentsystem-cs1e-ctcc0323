@@ -116,7 +116,7 @@ public class Admin extends JPanel {
     }
 
     private void setNewReading() {
-        mainApp.cardLayout.show(mainApp, "NewReading");
+        mainApp.cardLayout.show(mainApp.mainPanel, "NewReading");
         mainApp.database.usersToFile();
     }
 
