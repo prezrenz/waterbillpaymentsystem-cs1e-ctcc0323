@@ -14,9 +14,11 @@ import javax.swing.JPanel;
  */
 public class App extends JFrame 
 {
+
     JPanel mainPanel;
     CardLayout cardLayout;
     Database database;
+    User currentUser;
 
     Login loginScreen;
     Registration registrationScreen;
@@ -36,8 +38,8 @@ public class App extends JFrame
         registrationScreen = new Registration(this);
         adminScreen = new Admin(this);
         newReadingScreen = new NewReading(this);
-        
-        paymentScreen = new Payment();
+        paymentScreen = new Payment(this);
+
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");
         mainPanel.add(adminScreen, "Admin");
