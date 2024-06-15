@@ -93,7 +93,7 @@ public class Registration extends JPanel {
         buttonsPanel.add(backButton);
 
         registerButton.addActionListener((ae) -> register());
-        backButton.addActionListener((ae) -> mainApp.cardLayout.show(mainApp.mainPanel, "Login"));
+        backButton.addActionListener((ae) -> back());
     }
 
     private void register() {
@@ -104,10 +104,21 @@ public class Registration extends JPanel {
             String address = addressField.getText();
             String creditCardNumber = creditCardField.getText();
 
+            if((name.isEmpty()) || (email.isEmpty()) || (password.isEmpty()) || (address.isEmpty()) || (creditCardNumber.isEmpty())) {
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
         } catch (Database.DatabaseError e) {
-            System.out.print("caught");
             JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) { // Catch-all
+            e.printStackTrace();
         }
+    }
+
+    private void back() {
+        mainApp.cardLayout.show(mainApp.mainPanel, "Login");
+        mainApp.database.usersToFile();
     }
 }

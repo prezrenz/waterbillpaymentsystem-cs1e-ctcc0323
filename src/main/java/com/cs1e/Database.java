@@ -73,7 +73,7 @@ public class Database {
         String data = "";
 
         for (User user : users) {
-            data = data.concat(user.stringify());
+            data = data.concat(user.stringify()).concat("\n");
         }
 
         return data;
@@ -107,12 +107,14 @@ public class Database {
 
     void newUser(String name, String email, String password, String address, String creditCardNumber) {
         for (User user : users) {
-            if(name == user.name) {
-                throw new DatabaseError("User already exists");
+            if((name.equals(user.name)) || (email.equals(user.email)) || (creditCardNumber.equals(user.creditCardNumber))) {
+                throw new DatabaseError("User already exists, please use a different name, email, or credit card number");
             }
-        }
+        } 
 
         User newUser = new User(name, email, password, false, address, 0, 0, 0, 0, "11/11/1111", "UNVERIFIED", creditCardNumber, 1000);
+
+        System.out.println(newUser.stringify());
 
         users.add(newUser);
 
