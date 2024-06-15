@@ -83,7 +83,7 @@ public class User {
     }
 
     String stringify() {
-        return String.format("%s,%s,%s,%b,%s,%d,%d,%d,%d,%s,%s,%s,%d",
+        return String.format("%s:%s:%s:%b:%s:%d:%d:%d:%d:%s:%s:%s:%d",
                             name, email, password, isAdmin,
                             address, previousReading, currentReading, consumption,
                             totalDue, dueDate, status, creditCardNumber, balance);

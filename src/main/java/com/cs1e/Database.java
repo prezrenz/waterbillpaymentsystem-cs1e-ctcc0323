@@ -2,6 +2,7 @@
 package com.cs1e;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.*;
 
 public class Database {
@@ -103,7 +104,7 @@ public class Database {
     }
 
     User stringToUser(String data) {
-        String[] split = data.split(",");
+        String[] split = data.split(":");
 
         String name = split[0];
         String email = split[1];
@@ -143,15 +144,23 @@ public class Database {
 
     void deleteUser(String email) {
         boolean found = false;
-        for (User user : users) {
+        Iterator<User> iter = users.iterator(); // Use iterator to avoid concurrent modification exception
+
+        while (iter.hasNext()) {
+            User user = iter.next();
+
             if(email.equals(user.email)) {
                 if(user.status.equalsIgnoreCase("admin")) {
                     throw new DatabaseError("Cannot delete the admin account!");
                 }
 
                 found = true;
-                users.remove(user);
+                iter.remove();
             }
+        }
+
+        for (User user : users) {
+            
         }
 
         if(!found) {
