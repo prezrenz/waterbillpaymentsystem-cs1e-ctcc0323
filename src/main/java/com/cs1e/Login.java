@@ -75,8 +75,14 @@ public class Login extends JPanel {
             if(user.password.equals(password)) {
                 JOptionPane.showMessageDialog(mainApp, "Successfully logged in!");
                 mainApp.currentUser = user;
-                mainApp.dashboardScreen.setup();
-                mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
+                
+                if(user.status.equalsIgnoreCase("admin")) {
+                    mainApp.dashboardScreen.setup();
+                    mainApp.cardLayout.show(mainApp.mainPanel, "Admin");
+                } else {
+                    mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
+                }
+
                 return;
             }
             
