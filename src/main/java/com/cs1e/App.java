@@ -40,7 +40,7 @@ public class App extends JFrame
         adminScreen = new Admin(this);
         newReadingScreen = new NewReading(this);
         paymentScreen = new Payment(this);
-        dashboardScreen = new Dashboard();
+        dashboardScreen = new Dashboard(this);
 
         mainPanel.add(loginScreen, "Login");
         mainPanel.add(registrationScreen, "Register");
