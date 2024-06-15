@@ -50,7 +50,7 @@ public class App extends JFrame
     }
 
     public static void main( String[] args ) {
-        final int WIDTH = 540;
+        final int WIDTH = 560;
         final int HEIGHT = 400;
 
         new App(WIDTH, HEIGHT);
