@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -74,5 +75,32 @@ public class NewReading extends JPanel {
         add(buttonsPanel);
         buttonsPanel.add(confirmButton);
         buttonsPanel.add(backButton);
+
+        confirmButton.addActionListener((ae) -> setNewReading());
+        backButton.addActionListener((ae) -> back());
+    }
+
+    private void setNewReading() {
+        String email = emailField.getText();
+        String reading = readingField.getText();
+        String newDueDate = newDueField.getText();
+
+        if(email.isEmpty() || reading.isEmpty() || newDueDate.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill up all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        
+        try {
+            int newReading = Integer.valueOf(reading);
+            mainApp.database.setNewReading(email, newReading, newDueDate);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid whole number for the current reading", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+    }
+
+    private void back() {
+        mainApp.cardLayout.show(mainApp.mainPanel, "Login");
+        mainApp.database.usersToFile();
     }
 }

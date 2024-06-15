@@ -1,5 +1,7 @@
 package com.cs1e;
 
+import java.awt.FlowLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -50,7 +52,7 @@ public class Registration extends JPanel {
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
         fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.X_AXIS));
+        optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         emailLabel = new JLabel("Email", JLabel.LEFT);
         passwordLabel = new JLabel("Password", JLabel.LEFT);
@@ -58,11 +60,11 @@ public class Registration extends JPanel {
         addressLabel = new JLabel("Address", JLabel.LEFT);
         creditCardLabel = new JLabel("Credit Card Number", JLabel.LEFT);
 
-        emailField = new JTextField(32);
-        passwordField = new JTextField(32);
-        nameField = new JTextField(32);
-        addressField = new JTextField(32);
-        creditCardField = new JTextField(32);
+        emailField = new JTextField(24);
+        passwordField = new JTextField(24);
+        nameField = new JTextField(24);
+        addressField = new JTextField(24);
+        creditCardField = new JTextField(24);
 
         registerButton = new JButton("Register");
         backButton = new JButton("Back");

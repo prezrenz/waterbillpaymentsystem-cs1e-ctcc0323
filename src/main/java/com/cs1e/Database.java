@@ -18,7 +18,7 @@ public class Database {
     }
 
     ArrayList<User> users = new ArrayList<User>();
-
+    final int RATE = 10;
     String databaseFileName = "users.dat";
 
     Database() {
@@ -151,6 +151,26 @@ public class Database {
 
                 found = true;
                 users.remove(user);
+            }
+        }
+
+        if(!found) {
+            throw new DatabaseError("User not found");
+        }
+
+        usersToFile();
+    }
+
+    void setNewReading(String email, int newReading, String newDueDate) {
+        boolean found = false;
+        for (User user : users) {
+            if(email.equals(user.email)) {
+                if(user.status.equalsIgnoreCase("admin")) {
+                    throw new DatabaseError("Cannot set reading for an admin account!");
+                }
+
+                found = true;
+                user.setNewReading(newReading, newDueDate, RATE);
             }
         }
 
