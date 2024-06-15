@@ -1,21 +1,21 @@
 package com.cs1e;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-//import java.awt.*;
-//import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Payment extends JFrame {
     JLabel LThaniel, LStatus, LDue, LBalance, LAmountDue, LBalanceAfterPay;
-    //JButton Confirm, Back;
+    JButton Confirm, Back;
 
     public Payment() {
         setSize(560, 400);
         setLayout(null);
 
         LThaniel = new JLabel("PAYMENT");
-        LThaniel.setBounds(200, 70, 200, 20);
+        LThaniel.setBounds(250, 50, 200, 20);
         add(LThaniel);
 
 
@@ -40,15 +40,15 @@ public class Payment extends JFrame {
         add(LBalanceAfterPay);
 
 
-        //Confirm = new JButton("Confirm");
-        //Confirm.setBounds(150, 250, 100, 30);
+        Confirm = new JButton("Confirm");
+        Confirm.setBounds(150, 250, 100, 30);
         //Confirm.addActionListener(this);
-        //frame.add(Confirm);
+        add(Confirm);
 
-        //Back = new JButton("Back");
-        //Back.setBounds(300, 250, 100, 30);
+        Back = new JButton("Back");
+        Back.setBounds(300, 250, 100, 30);
         //Back.addActionListener(this);
-        //frame.add(Back);
+        add(Back);
 
 
         setVisible(true);
