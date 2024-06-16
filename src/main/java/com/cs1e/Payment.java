@@ -77,6 +77,7 @@ public class Payment extends JPanel {
         try {
             mainApp.currentUser.pay(); 
             JOptionPane.showMessageDialog(mainApp, "Successfully paid due");
+            mainApp.dashboardScreen.setup();
             back();
         } catch (DatabaseError e) {
             JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Payment Error!", JOptionPane.ERROR_MESSAGE);
