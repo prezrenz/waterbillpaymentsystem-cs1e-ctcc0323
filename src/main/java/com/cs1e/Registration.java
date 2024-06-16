@@ -126,6 +126,11 @@ public class Registration extends JPanel {
                 throw new Database.DatabaseError("Spaces are not allowed in password");
             }
 
+            // pattern from: https://www.baeldung.com/java-email-validation-regex
+            if(!email.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
+                throw new Database.DatabaseError("Please use a valid email");
+            }
+
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
             JOptionPane.showMessageDialog(mainApp, "Successfully registered user!");
             clearFields();
