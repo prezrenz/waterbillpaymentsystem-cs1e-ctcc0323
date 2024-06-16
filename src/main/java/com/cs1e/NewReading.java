@@ -113,7 +113,7 @@ public class NewReading extends JPanel {
     }
 
     private void back() {
-        mainApp.cardLayout.show(mainApp.mainPanel, "Login");
+        mainApp.cardLayout.show(mainApp.mainPanel, "Admin");
         mainApp.database.usersToFile();
     }
 }
