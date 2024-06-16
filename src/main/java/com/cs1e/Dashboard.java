@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import com.cs1e.Database.DatabaseError;
 
@@ -137,7 +138,9 @@ public class Dashboard extends JPanel {
     
     private void changePassword() {
         try {
-            String newPassword = JOptionPane.showInputDialog("Enter new password:");
+            JPasswordField newPasswordField = new JPasswordField(16);
+            JOptionPane.showConfirmDialog(mainApp, newPasswordField, "Enter new password", JOptionPane.OK_CANCEL_OPTION);
+            String newPassword = new String(newPasswordField.getPassword());
 
             if(newPassword.isEmpty()) {
                 throw new DatabaseError("Please enter a new password");

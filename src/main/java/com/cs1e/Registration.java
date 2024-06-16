@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -28,7 +29,7 @@ public class Registration extends JPanel {
     JLabel creditCardLabel;
     
     JTextField emailField;
-    JTextField passwordField;
+    JPasswordField passwordField;
     JTextField nameField;
     JTextField addressField;
     JTextField creditCardField;
@@ -61,7 +62,7 @@ public class Registration extends JPanel {
         creditCardLabel = new JLabel("Credit Card Number", JLabel.LEFT);
 
         emailField = new JTextField(24);
-        passwordField = new JTextField(24);
+        passwordField = new JPasswordField(24);
         nameField = new JTextField(24);
         addressField = new JTextField(24);
         creditCardField = new JTextField(24);
@@ -112,7 +113,7 @@ public class Registration extends JPanel {
         try {
             String name = nameField.getText();
             String email = emailField.getText();
-            String password = passwordField.getText();
+            String password = new String(passwordField.getPassword());
             String address = addressField.getText();
             String creditCardNumber = creditCardField.getText();
 

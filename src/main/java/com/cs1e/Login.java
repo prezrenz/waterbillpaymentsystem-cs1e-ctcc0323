@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.cs1e.Database.DatabaseError;
@@ -13,7 +14,8 @@ public class Login extends JPanel {
     App mainApp;
 
     JLabel Title, Email, Password;
-    JTextField TEmail, TPassword;
+    JTextField TEmail;
+    JPasswordField TPassword;
     JButton Login, Register, Exit;
 
     Login(App parent) {
@@ -38,7 +40,7 @@ public class Login extends JPanel {
         TEmail.setBounds(150, 50, 300, 20);
         add(TEmail);
 
-        TPassword = new JTextField(32);
+        TPassword = new JPasswordField(32);
         TPassword.setBounds(150, 90, 300, 20);
         add(TPassword);
 
@@ -61,7 +63,7 @@ public class Login extends JPanel {
     private void login() {
         try {
             String email = TEmail.getText();
-            String password = TPassword.getText();
+            String password = new String(TPassword.getPassword());
 
             if((email.isEmpty()) || (password.isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Login Error", JOptionPane.ERROR_MESSAGE);
