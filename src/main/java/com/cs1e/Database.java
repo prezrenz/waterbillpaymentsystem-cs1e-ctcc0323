@@ -131,7 +131,7 @@ public class Database {
 
     User findUser(String email) {
         for (User user : users) {
-            if(email.equals(user.email)) {
+            if(email.equalsIgnoreCase(user.email)) {
                 return user;
             }
         }
