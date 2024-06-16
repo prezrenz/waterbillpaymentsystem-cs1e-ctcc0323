@@ -92,10 +92,18 @@ public class User {
     }
 
     void setNewReading(int newReading, String newDueDate, final int RATE) {
+        int oldDue = 0;
+        
         previousReading = currentReading;
         currentReading = newReading;
         consumption = currentReading - previousReading;
-        totalDue = consumption * RATE;
+        
+        if(status.equalsIgnoreCase("UNPAID")) {
+            oldDue = totalDue;
+        }
+
+        int newDue = consumption * RATE;
+        totalDue = newDue + oldDue;
 
         dueDate = newDueDate;
         status = "UNPAID";
