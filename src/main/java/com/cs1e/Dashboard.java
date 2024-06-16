@@ -139,7 +139,7 @@ public class Dashboard extends JPanel {
     private void changePassword() {
         try {
             JPasswordField newPasswordField = new JPasswordField(16);
-            JOptionPane.showConfirmDialog(mainApp, newPasswordField, "Enter new password", JOptionPane.OK_OPTION);
+            JOptionPane.showConfirmDialog(mainApp, newPasswordField, "Enter new password", JOptionPane.DEFAULT_OPTION);
             String newPassword = new String(newPasswordField.getPassword());
 
             if(newPassword.isEmpty()) {
