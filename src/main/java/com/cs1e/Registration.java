@@ -122,6 +122,10 @@ public class Registration extends JPanel {
                 return;
             }
 
+            if(password.contains(" ")) {
+                throw new Database.DatabaseError("Spaces are not allowed in password");
+            }
+
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
             JOptionPane.showMessageDialog(mainApp, "Successfully registered user!");
             clearFields();
