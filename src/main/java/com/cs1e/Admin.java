@@ -134,6 +134,7 @@ public class Admin extends JPanel {
 
         try {
             mainApp.database.deleteUser(email);
+            JOptionPane.showMessageDialog(mainApp, "Successfully deleted account!");
         } catch (DatabaseError e) {
             JOptionPane.showMessageDialog(null, e.getMsg(), "Failed to delete account!", JOptionPane.ERROR_MESSAGE);
         }
