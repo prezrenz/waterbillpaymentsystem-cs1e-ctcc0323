@@ -82,6 +82,12 @@ public class NewReading extends JPanel {
         backButton.addActionListener((ae) -> back());
     }
 
+    private void clearFields() {
+        emailField.setText("");
+        readingField.setText("");
+        newDueField.setText("");
+    }
+
     private void setNewReading() {
         String email = emailField.getText();
         String reading = readingField.getText();
@@ -96,6 +102,9 @@ public class NewReading extends JPanel {
         try {
             int newReading = Integer.valueOf(reading);
             mainApp.database.setNewReading(email, newReading, newDueDate);
+            JOptionPane.showMessageDialog(mainApp, "Successfully set new reading!");
+            clearFields();
+            back();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid whole number for the current reading", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DatabaseError e) {

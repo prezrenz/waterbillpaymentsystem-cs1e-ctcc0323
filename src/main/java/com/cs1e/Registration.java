@@ -100,6 +100,14 @@ public class Registration extends JPanel {
         backButton.addActionListener((ae) -> back());
     }
 
+    private void clearFields() {
+        emailField.setText("");
+        passwordField.setText("");
+        nameField.setText("");
+        addressField.setText("");
+        creditCardField.setText("");
+    }
+
     private void register() {
         try {
             String name = nameField.getText();
@@ -114,8 +122,11 @@ public class Registration extends JPanel {
             }
 
             mainApp.database.newUser(name, email, password, address, creditCardNumber);
+            JOptionPane.showMessageDialog(mainApp, "Successfully registered user!");
+            clearFields();
+            back();
         } catch (Database.DatabaseError e) {
-            JOptionPane.showMessageDialog(null, e.getMsg(), "Registration Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Registration Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) { // Catch-all
             e.printStackTrace();
         }

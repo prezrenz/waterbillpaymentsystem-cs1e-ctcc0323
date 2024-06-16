@@ -63,8 +63,6 @@ public class Login extends JPanel {
             String email = TEmail.getText();
             String password = TPassword.getText();
 
-            System.out.println(email.isEmpty());
-
             if((email.isEmpty()) || (password.isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Login Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -80,6 +78,7 @@ public class Login extends JPanel {
                     mainApp.cardLayout.show(mainApp.mainPanel, "Admin");
                 } else {
                     mainApp.dashboardScreen.setup();
+                    clearFields();
                     mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
                 }
 
@@ -90,6 +89,11 @@ public class Login extends JPanel {
         } catch (DatabaseError e) { 
             JOptionPane.showMessageDialog(mainApp, e.getMsg(), "Login Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void clearFields() {
+        TEmail.setText("");
+        TPassword.setText("");
     }
 
     private void register() {

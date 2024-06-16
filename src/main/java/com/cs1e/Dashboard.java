@@ -117,6 +117,7 @@ public class Dashboard extends JPanel {
             }
 
             // I hate this, but i don't have time to refactor
+            // Only god and i know how this works
             try { // find user throws error on user not found
                 mainApp.database.findUser(newEmail); // if this throws no error, means email already in use/found
                 JOptionPane.showMessageDialog(mainApp, "Email already in use", "Failed to change email", JOptionPane.ERROR_MESSAGE);
