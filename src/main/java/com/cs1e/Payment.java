@@ -65,6 +65,14 @@ public class Payment extends JPanel {
         add(Back);
     }
 
+    public void setup() {
+        LStatus.setText("Status: " + mainApp.currentUser.status);
+        LDue.setText("Due Date: " + mainApp.currentUser.dueDate);
+        LBalance.setText("Current Balance: " + mainApp.currentUser.balance);
+        LAmountDue.setText("Amount Due: " + mainApp.currentUser.totalDue);
+        LBalanceAfterPay.setText("Balance After Pay: " + (mainApp.currentUser.balance - mainApp.currentUser.totalDue));
+    }
+
     private void pay() {
         try {
             mainApp.currentUser.pay(); 
@@ -76,7 +84,7 @@ public class Payment extends JPanel {
     }
 
     private void back() {
-        mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard"); // currently errors
+        mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
         mainApp.database.usersToFile();
     }
 

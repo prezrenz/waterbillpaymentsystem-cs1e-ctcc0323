@@ -77,9 +77,9 @@ public class Login extends JPanel {
                 mainApp.currentUser = user;
                 
                 if(user.status.equalsIgnoreCase("admin")) {
-                    mainApp.dashboardScreen.setup();
                     mainApp.cardLayout.show(mainApp.mainPanel, "Admin");
                 } else {
+                    mainApp.dashboardScreen.setup();
                     mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
                 }
 
