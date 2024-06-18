@@ -1,5 +1,6 @@
 target/
 .settings/
+users.dat
 
 pom.xml.tag
 pom.xml.releaseBackup

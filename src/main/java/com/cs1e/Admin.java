@@ -165,7 +165,11 @@ public class Admin extends JPanel {
     }
 
     private void logout() {
-        mainApp.cardLayout.show(mainApp.mainPanel, "Login");
-        mainApp.database.usersToFile();
+        int answer = JOptionPane.showConfirmDialog(mainApp, "Are you sure you want to log out?", "Logging out...", JOptionPane.YES_NO_OPTION);
+
+        if(answer == 0) {
+            mainApp.cardLayout.show(mainApp.mainPanel, "Login");
+            mainApp.database.usersToFile();
+        }
     }
 }
