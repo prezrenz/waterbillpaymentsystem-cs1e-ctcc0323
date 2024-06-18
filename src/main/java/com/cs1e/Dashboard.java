@@ -4,6 +4,9 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -14,6 +17,9 @@ import com.cs1e.Database.DatabaseError;
 public class Dashboard extends JPanel {
     App mainApp;
 
+    JMenuBar menuBar;
+    JMenu settingsMenu;
+    JMenuItem changeNameMenuItem, changePassMenuItem, changeAddressMenuItem, changeEmailMenuItem;
     JLabel JWelcome, JStatus, JDueDate, JCons, JCurrent, JPrevious;
     JButton LChange, LPass, LAddress, LEmail, LPay, LLogout;
 
@@ -22,6 +28,24 @@ public class Dashboard extends JPanel {
 
         setPreferredSize(new Dimension(540, 400));
         setLayout(null);
+
+        menuBar = new JMenuBar();
+        settingsMenu = new JMenu("Account Settings");
+        changeNameMenuItem = new JMenuItem("Change Name");
+        changePassMenuItem = new JMenuItem("Change Password");
+        changeAddressMenuItem = new JMenuItem("Change Address");
+        changeEmailMenuItem = new JMenuItem("Change Email");
+
+        settingsMenu.add(changeNameMenuItem);
+        settingsMenu.add(changePassMenuItem);
+        settingsMenu.add(changeAddressMenuItem);
+        settingsMenu.add(changeEmailMenuItem);
+        menuBar.add(settingsMenu);
+
+        changeNameMenuItem.addActionListener((ae) -> changeName());
+        changePassMenuItem.addActionListener((ae) -> changePassword());
+        changeAddressMenuItem.addActionListener((ae) -> changeAddress());
+        changeEmailMenuItem.addActionListener((ae) -> changeEmail());
 
         JWelcome = new JLabel("Welcome, valued custumer!");
         JWelcome.setBounds(190, 10, 300, 20);
@@ -48,34 +72,33 @@ public class Dashboard extends JPanel {
         JPrevious.setBounds(195, 110, 200, 20);
         add(JPrevious);
 
-
-        LChange = new JButton("Change Name");
-        LChange.setBounds(100, 150, 150, 30);
-        LChange.addActionListener((ae) -> changeName());
-        add(LChange);
-
-        LPass = new JButton("Change Password");
-        LPass.setBounds(275, 150, 150, 30);
-        LPass.addActionListener((ae) -> changePassword());
-        add(LPass);
-
-        LAddress = new JButton("Change Address");
-        LAddress.setBounds(100, 200, 150, 30);
-        LAddress.addActionListener((ae) -> changeAddress());
-        add(LAddress);
-
-        LEmail = new JButton("Change Email");
-        LEmail.setBounds(275, 200, 150, 30);
-        LEmail.addActionListener((ae) -> changeEmail());
-        add(LEmail);
+        // LChange = new JButton("Change Name");
+        // LChange.setBounds(100, 150, 150, 30);
+        // LChange.addActionListener((ae) -> changeName());
+        // add(LChange);
+        //
+        // LPass = new JButton("Change Password");
+        // LPass.setBounds(275, 150, 150, 30);
+        // LPass.addActionListener((ae) -> changePassword());
+        // add(LPass);
+        //
+        // LAddress = new JButton("Change Address");
+        // LAddress.setBounds(100, 200, 150, 30);
+        // LAddress.addActionListener((ae) -> changeAddress());
+        // add(LAddress);
+        //
+        // LEmail = new JButton("Change Email");
+        // LEmail.setBounds(275, 200, 150, 30);
+        // LEmail.addActionListener((ae) -> changeEmail());
+        // add(LEmail);
 
         LPay = new JButton("Pay");
-        LPay.setBounds(185, 250, 150, 30);
+        LPay.setBounds(185, 150, 150, 100);
         LPay.addActionListener((ae) -> pay());
         add(LPay);
 
         LLogout = new JButton("Logout");
-        LLogout.setBounds(185, 300, 150, 30);
+        LLogout.setBounds(185, 260, 150, 30);
         LLogout.addActionListener((ae) -> logout());
         add(LLogout);
     }
@@ -199,6 +222,7 @@ public class Dashboard extends JPanel {
 
         if(answer == 0) {
             mainApp.cardLayout.show(mainApp.mainPanel, "Login");
+            mainApp.setJMenuBar(null);
             mainApp.database.usersToFile();
         }
 

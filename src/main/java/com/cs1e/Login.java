@@ -81,6 +81,7 @@ public class Login extends JPanel {
                 } else {
                     mainApp.dashboardScreen.setup();
                     clearFields();
+                    mainApp.setJMenuBar(mainApp.dashboardScreen.menuBar);
                     mainApp.cardLayout.show(mainApp.mainPanel, "Dashboard");
                 }
 
